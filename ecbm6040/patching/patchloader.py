@@ -93,7 +93,7 @@ def patching(lr_data, hr_data, patch_size = 2, cube_size = 64, usage = 1.0, marg
                                         shuffle=False)
         return patch_loader
 
-def depatching(patches, batch_size, margin = 3, image_size = [256,320,320]):
+def depatching(patches, batch_size, margin = 3, image_size = [192,320,320]):
     '''
     This function merges patches to the original 3D image. Note that this function based on tensor, but detached. 
     
@@ -103,6 +103,7 @@ def depatching(patches, batch_size, margin = 3, image_size = [256,320,320]):
     (Input) image_size: The size of original 3D image size [z,x,y]. [256,320,320] in this project (Default).
     (Output) image: # batch_size of the original 3D images in numpy.   
     '''
+    image_size = [192,320,320]
     padding=[20, 17, 17] # calculate how many paddings we need to care for edges of images, for simplicity, the numbers are pre-calculated by default patch size, for different size of input, it should be different.
     cube_size = patches.shape[-1]
     tmp = patches.view(batch_size, -1, cube_size, cube_size, cube_size)
