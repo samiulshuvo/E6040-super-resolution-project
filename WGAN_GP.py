@@ -505,7 +505,10 @@ class WGAN_GP(object):
                     # statistics
                     # concatenate patches, send patches to cpu to save GPU memory
                     sr_data_cat = torch.cat([sr_data_cat, sr_patches.to("cpu")],0)
-            # calculate the evaluation metric
+            print(sr_data_cat.dtype)
+            print('calculate the evaluation metric')
+            print(sr_data_cat.size())
+            print(lr_data.size(0))
             sr_data = depatching(sr_data_cat, lr_data.size(0))
             batch_ssim = ssim(hr_data, sr_data)
             batch_psnr = psnr(hr_data, sr_data)
