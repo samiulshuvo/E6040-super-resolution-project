@@ -124,7 +124,7 @@ def depatching(patches, batch_size, margin = 3, image_size = [192,320,320]):
     print(real_tmp.size())
     image = torch.zeros(batch_size, image_size[0], image_size[1], image_size[2])
     print('################# cube_size_cropped ###############')
-    print(cube_size_cropped.size())
+    #print(cube_size_cropped.size())
 
     for i in range(nz):
         for j in range(nx):
@@ -133,8 +133,8 @@ def depatching(patches, batch_size, margin = 3, image_size = [192,320,320]):
                 merged_image[:,cube_size_cropped*i:cube_size_cropped*(i+1), cube_size_cropped*j:cube_size_cropped*(j+1), 
                              cube_size_cropped*k:cube_size_cropped*(k+1)] = real_tmp[:,i,j,k,:,:,:] 
     print('3333333 merged_image 3333333')
-    print(merged_image.size())
+    #print(merged_image.size())
     image=merged_image[:,(padding[0]-margin):-(padding[0]-margin),(padding[1]-margin):-(padding[1]-margin),
                        (padding[2]-margin):-(padding[2]-margin)]
-    print(image.size())
+    #print(image.size())
     return image
