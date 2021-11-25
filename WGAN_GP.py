@@ -512,7 +512,7 @@ class WGAN_GP(object):
             sr_data = depatching(sr_data_cat, lr_data.size(0))
             batch_ssim = ssim(hr_data, sr_data)
             batch_psnr = psnr(hr_data, sr_data)
-            batch_nrmse = nrmse(hr_data, sr_data)
+            batch_nrmse = nrmse(0)
             test_ssim = np.append(test_ssim, batch_ssim)
             test_psnr = np.append(test_psnr, batch_psnr)
             test_nrmse = np.append(test_nrmse, batch_nrmse)
