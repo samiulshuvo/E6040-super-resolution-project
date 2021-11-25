@@ -1,6 +1,7 @@
 import skimage.measure as measure
 import torch
 import numpy as np
+from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 
 def ssim(img_true, img_test):
     '''
@@ -16,7 +17,9 @@ def ssim(img_true, img_test):
     
     ssim=[]
     for i in range(img_true.shape[0]):
-        ssim = np.append(ssim, measure.compare_ssim(img_true[i], img_test[i]))
+     
+
+        ssim = np.append(ssim, structural_similarity(img_true[i], img_test[i], multichannel=True, data_range=img_true[i].max() - img_true[i].min()))
     return ssim
 
 def psnr(img_true, img_test):
@@ -32,7 +35,8 @@ def psnr(img_true, img_test):
     img_test = img_test.numpy()
     psnr=[]
     for i in range(img_true.shape[0]):
-        psnr = np.append(psnr, measure.compare_psnr(img_true[i], img_test[i]))
+        
+        psnr = np.append(psnr, peak_signal_noise_ratio(img_true[i], img_test[i], data_range=img_true[i].max() - img_true[i].min()))
     return psnr
 
 def nrmse(img_true, img_test):
